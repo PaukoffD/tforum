@@ -1,0 +1,45 @@
+бекап для form topic 
+
+
+ <%= simple_form_for(@topic) do |f| %>
+   <%= f.error_notification %>
+  <%=  f.input :subject, label: "Category title: " %>
+   <%= f.simple_fields_for :posts, @topic.posts.build do |q| %>
+    <%=  q.input :text, label: "Question content:" , class: 'form-control', rows: 6,  :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}}  %>
+   <% end %>
+   <%= f.button :submit %>
+
+<% end %>
+
+туда же...внимание на урл
+
+
+
+<%= simple_form_for( @topic, :url => forum_topic_posts_path(@forum.id)) do |f| %>
+
+topic controller
+
+def create
+    #redirect_to "/forums/#{@topic.forum_id}"
+	#@forum = Forum.find(params[:forum_id])
+    @topic = Topic.new topic_params
+    @post = Post.new
+
+    
+    #if @topic.save
+	#@topic.subject = subject
+    @topic = Topic.new(:user_id => current_user.id, :last_post_at => Time.now, :forum_id => topic.forum_id)
+	#@topic.forum_id = @forum.id
+    #@topic.save
+	#@post.comments << @comment
+   # if @post.save
+    #  flash[:notice] = "Successfully created topic."
+    #  redirect_to "/forums/#{@topic.forum_id}"
+	  
+   # else
+   #   redirect :action => 'new'
+   # end
+  #else
+   # render :action => 'new'
+    
+  end

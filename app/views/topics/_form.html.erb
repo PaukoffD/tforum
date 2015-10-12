@@ -1,0 +1,9 @@
+
+<%= simple_form_for   [@forum, @topic] do |f| %>
+   <%= f.error_notification %>
+  <%=  f.input :subject, label: "Category title: " %>
+   <%= f.simple_fields_for :posts do |q| %>
+    <%=  q.input :text, label: "Question content:", class: 'form-control', rows: 6,  :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}}    %>
+   <% end %>
+   <%= f.button :submit %>
+ <% end %>

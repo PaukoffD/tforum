@@ -1,0 +1,14 @@
+
+
+  <%= simple_form_for @post do |f| %>
+<<<<<<< HEAD
+  
+  <%= f.input :text, :input_html => { :class => "field col-md-12" }, class: 'form-control', rows: 6,  :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}} %>
+=======
+ 
+  <%= f.input :text, class: 'form-control', rows: 6,  :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}} %>
+>>>>>>> origin/master
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to 'Back', posts_path %>
