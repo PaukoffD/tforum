@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @topic = Topic.find(params[:topic_id])
     @post = Post.new
   end
 
@@ -24,15 +25,19 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @topic = Topic.find(params[:topic_id])
     @post = Post.new(post_params)
-
+    @post.topic_id = @topic.id
+    @post.user_id = current_user.id	
+	#@post.last_post_at = Time.now
+	#@post.reply_to_id = current_user.id
     respond_to do |format|
       if @post.save
-        #format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to topic_path(@topic.id), notice: 'Post was successfully created.' }
         #format.json { render :show, status: :created, location: @post }
       else
-        #format.html { render :new }
-        #format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -71,6 +76,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:text)
+      params.require(:post).permit(:text, :user_id, :topic_id, :reply_to_id, posts:[:text])
     end
 end

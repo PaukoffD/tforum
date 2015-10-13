@@ -9,7 +9,7 @@
   </thead>
   
     <tbody>
-  <% for topic in @forum.topics %>
+  <% for topic in @topics %>
     <tr>
       <td><%= link_to h(topic.subject), topic_path(topic.id) %>
       <td><%= topic.posts.count-1  %></td>
@@ -19,6 +19,6 @@
    </tbody>
 </table>
 
-<td><%= @forum.id  %></td>
+
  
-<p><%= link_to "New Topic", new_forum_topic_path(@forum.id) %></p>
+<p><%= link_to "New Topic", new_forum_topic_path(topic.forum_id) %></p>

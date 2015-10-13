@@ -6,12 +6,15 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
   def index
     
     @topics = Topic.all
+	@topics.order(:created_at).last
   end
 
  
   def show
    @topic = Topic.find(params[:id])
    @post = Post.find_by topic_id: @topic.id
+   @topic.views_count=@topic.views_count+1
+   @topic.save
   end
 
   
@@ -55,6 +58,7 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
 	@topic.save
 	#@post.content = params[:topic][:posts_attributes][:content]
 	@post.topic_id=@topic.id
+	@post.user_id = current_user.id
 	#@post.save
     respond_to do |format|
     #  if @topic.save
