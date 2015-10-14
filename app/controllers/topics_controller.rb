@@ -6,7 +6,7 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
   def index
     
     @topics = Topic.all
-	@topics.order(:created_at).last
+    Topic.order("created_at DESC")
   end
 
  

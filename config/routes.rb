@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
    root 'forums#index'
-
+   get 'latest', to: 'topics#index'
   
 
   

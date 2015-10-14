@@ -13,7 +13,7 @@
     <tr>
       <td><%= link_to h(topic.subject), topic_path(topic.id) %>
       <td><%= topic.posts.count-1  %></td>
-      
+      <td><%= topic.posts.text  %></td>
     </tr>
   <% end %>
    </tbody>

@@ -26,17 +26,22 @@
         <%=h forum.description %></td>
 		
 		<td class="right"><% if forum.last_topic %>
-		<h4><%= link_to h(forum.last_topic.subject), forum_topics_path(@topic.id) %> </h4>
-		<%= distance_of_time_in_words_to_now forum.last_topic.last_post_at %> ago<% else %>no posts<% end %></td>
+		<h4><%= link_to h(forum.last_topic.subject), topic_path(@topic.id) %> </h4>
+		<%= distance_of_time_in_words_to_now forum.last_topic.last_post_at %> ago by 
+		<%= link_to forum.last_topic_user, root_path %>
+		<% else %>no posts<% end %></td>
 		
 		<td class="right">
 		<h4><span class="badge"><%= forum.topics.count %></span></a> topics</h4>
 		</td>
 		
 		<td class="right">
-		<h4><span class="badge"><%= @topic.posts.count %></span></a> views</h4>
+		<h4><span class="badge"><%= forum.count_post-forum.topics.count %></span></a> replies</h4>
 		</td>
 		
+		<td class="right">
+		<h4><span class="badge"><%= forum.count_reply %></span></a> views</h4>
+		</td>
 
       </tr>
     <% end %>
