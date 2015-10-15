@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   def new
     @topic = Topic.find(params[:topic_id])
     @post = Post.new
+	@post.reply_to_id = 1 
   end
 
   # GET /posts/1/edit
@@ -29,7 +30,13 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.topic_id = @topic.id
     @post.user_id = current_user.id	
-	#@post.last_post_at = Time.now
+	@post.reply_to_id = 1 
+	count = Post.where(topic_id: @topic.id).count
+	if count>1
+	 @post.reply_to_id = count
+    end	 
+	puts "счет " 
+	puts count
 	#@post.reply_to_id = current_user.id
     respond_to do |format|
       if @post.save
