@@ -13,7 +13,7 @@
     <tr>
       <td><%= link_to h(topic.subject), topic_path(topic.id) %>
       <td><%= topic.posts.count-1  %></td>
-      <td><%= @post.text  %></td>
+      
     </tr>
   <% end %>
    </tbody>
@@ -22,3 +22,4 @@
 
  
 <p><%= link_to "New Topic", new_forum_topic_path(topic.forum_id) %></p>
+<%= will_paginate(@topics) %>
