@@ -4,10 +4,12 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
   
 
   def index
-    
+   
     @topics = Topic.all.page(params[:page])
     topic=Topic.order(:created_at).reorder('id DESC').last
+	@forum = Forum.find(topic.forum_id)
 	@post = Post.find_by topic_id: topic.id
+	#return forum
   end
 
  

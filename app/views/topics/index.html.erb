@@ -13,6 +13,8 @@
     <tr>
       <td><%= link_to h(topic.subject), topic_path(topic.id) %>
       <td><%= topic.posts.count-1  %></td>
+	  <td><%= @post.created_at %>  by  <p><%= link_to @forum.last_topic_user, root_path, :class => "text-success"%></p></td>
+	  
       
     </tr>
   <% end %>
@@ -21,5 +23,5 @@
 
 
  
-<p><%= link_to "New Topic", new_forum_topic_path(topic.forum_id) %></p>
+<p><%= link_to "New Topic", new_forum_topic_path(topic.forum_id), :class => "btn btn-primary"%></p>
 <%= will_paginate(@topics) %>
