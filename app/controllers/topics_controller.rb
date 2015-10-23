@@ -62,10 +62,13 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
 	#@post.content = params[:topic][:posts_attributes][:content]
 	@post.topic_id=@topic.id
 	@post.user_id = current_user.id
+	puts @post.user_id
+	#@post.text = params[:posts_attributes [:id,[:text]]]
+	#puts @post.text
 	#@post.save
     respond_to do |format|
     #  if @topic.save
-        format.html { redirect_to topic_path(@topic.id), notice: 'Topic was successfully created.' }
+        format.html { redirect_to forum_path(params[:forum_id]), notice: 'Topic was successfully created.' }
        
       #else
       #  format.html { render :new }
@@ -106,6 +109,6 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:subject, :user_id, :last_post_at, :forum_id, :topic_id, posts_attributes: [:id,[:text]] )
+      params.require(:topic).permit(:subject, :user_id, :last_post_at, :forum_id, :text, :topic_id, posts_attributes: [:id,[:text]], posts_attributes: [:id])
     end
 end
