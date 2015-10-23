@@ -13,7 +13,7 @@
     <tr>
       <td><%= link_to h(topic.subject), topic_path(topic.id) %>
       <td><%= topic.posts.count-1  %></td>
-	  <td><%= @post.created_at %>  by  <p><%= link_to @forum.last_topic_user, root_path, :class => "text-success"%></p></td>
+	  <td><%= topic.posts.last.created_at %>  by <%= topic.posts.last.user_id %> <%= topic.id %><p><%= link_to topic.posts.last.last_topic_user, root_path, :class => "text-success"%></p></td>
 	  
       
     </tr>
